@@ -1,23 +1,25 @@
 <?php
 
+//test
+
 namespace App\Repository;
 
-use App\Entity\Saved;
+use App\Entity\Save;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
 
 /**
- * @extends ServiceEntityRepository<Saved>
+ * @extends ServiceEntityRepository<Save>
  */
 class SaveRepository extends ServiceEntityRepository
 {
     public function __construct(ManagerRegistry $registry)
     {
-        parent::__construct($registry, Saved::class);
+        parent::__construct($registry, Save::class);
     }
 
     //    /**
-    //     * @return Saved[] Returns an array of Saved objects
+    //     * @return Save[] Returns an array of Save objects
     //     */
     //    public function findByExampleField($value): array
     //    {
@@ -31,7 +33,7 @@ class SaveRepository extends ServiceEntityRepository
     //        ;
     //    }
 
-    //    public function findOneBySomeField($value): ?Saved
+    //    public function findOneBySomeField($value): ?Save
     //    {
     //        return $this->createQueryBuilder('s')
     //            ->andWhere('s.exampleField = :val')
