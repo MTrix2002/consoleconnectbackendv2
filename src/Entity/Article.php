@@ -1,5 +1,5 @@
 <?php
-
+// src/Entity/Article.php
 namespace App\Entity;
 
 use App\Repository\ArticleRepository;
@@ -31,10 +31,14 @@ class Article
     #[ORM\Column(nullable: true)]
     private ?int $nbr_comments = null;
 
+    #[ORM\ManyToOne(targetEntity: Category::class, inversedBy: 'articles')]
+    #[ORM\JoinColumn(nullable: false)]
+    private ?Category $category = null;
+
     /**
-     * @var Collection<int, save>
+     * @var Collection<int, Save>
      */
-    #[ORM\OneToMany(targetEntity: save::class, mappedBy: 'cancel')]
+    #[ORM\OneToMany(targetEntity: Save::class, mappedBy: 'cancel')]
     private Collection $saves;
 
     public function __construct()
@@ -107,15 +111,27 @@ class Article
         return $this;
     }
 
+    public function getCategory(): ?Category
+    {
+        return $this->category;
+    }
+
+    public function setCategory(?Category $category): static
+    {
+        $this->category = $category;
+
+        return $this;
+    }
+
     /**
-     * @return Collection<int, save>
+     * @return Collection<int, Save>
      */
     public function getSaves(): Collection
     {
         return $this->saves;
     }
 
-    public function addSave(save $save): static
+    public function addSave(Save $save): static
     {
         if (!$this->saves->contains($save)) {
             $this->saves->add($save);
@@ -125,7 +141,7 @@ class Article
         return $this;
     }
 
-    public function removeSave(save $save): static
+    public function removeSave(Save $save): static
     {
         if ($this->saves->removeElement($save)) {
             // set the owning side to null (unless already changed)
